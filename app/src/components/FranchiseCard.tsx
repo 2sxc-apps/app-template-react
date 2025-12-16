@@ -8,7 +8,7 @@ export default function FranchiseCard({ franchise }: { franchise: Franchise }) {
 
   const handleEditClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!cardRef.current) return;
-    const params = { contentType: "Franchises", entityId: franchise.Id };
+    const params = { contentType: "Franchise", entityId: franchise.Id };
     toolbar.openDialog(cardRef.current, event, "edit" as CommandNames, params);
   };
 

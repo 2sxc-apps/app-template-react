@@ -1,3 +1,5 @@
+import type { Conference } from "./Conference";
+
 export interface Franchise {
   Id: number;
   Name: string;
@@ -6,6 +8,6 @@ export interface Franchise {
   Logo: string;
   Website?: string;
   Color: string;
-  Conference: 'East' | 'West';
+  Conference: Conference[];
   Stadium: string;
 }

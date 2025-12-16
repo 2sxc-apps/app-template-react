@@ -17,13 +17,19 @@ export default function App({ moduleId }: AppProps) {
 
   const handleAddClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!containerRef.current) return;
-    const params = { contentType: "Franchises" };
+    const params = { contentType: "Franchise" };
     toolbar.openDialog(containerRef.current, event, "edit" as CommandNames, params);
   };
 
   const filteredFranchises = conferenceFilter
-    ? franchises.filter((f) => f.Conference === conferenceFilter)
+    ? franchises.filter(
+        f => f.Conference?.[0]?.Title === conferenceFilter
+      )
     : franchises;
+
+    console.log('Filtered Franchises 1:', filteredFranchises);
+    console.log('Filtered Franchises 2:', filteredFranchises.map(f => f.Conference[0].Title));
+    console.log('Filtered Franchises 3:', conferenceFilter);
 
   useEffect(() => {
     const fetchData = async () => {
