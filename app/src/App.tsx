@@ -36,7 +36,7 @@ export default function App({ moduleId }: AppProps) {
 
       try {
         const data = await sxc.webApi.fetchJson(
-          "/api/2sxc/app/auto/data/Franchises"
+          "/app-template-react/api/2sxc/app/auto/data/Franchise"
         );
         setFranchises(data);
       } catch (err) {
