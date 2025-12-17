@@ -1,6 +1,8 @@
 @inherits Custom.Hybrid.RazorTyped
-@using ToSic.Razor.Blade;
+@using AppCode.Editions
+@using AppCode.React
 @using ToSic.Sxc.Services;
+@using ToSic.Razor.Blade;
 
 @{
   var moduleId = MyContext.Module.Id;
@@ -13,10 +15,10 @@
   HtmlPage.AddBase((Link.Base()));
 
   // Create helper to manage the editions (live, staging etc.)
-  var editions = GetCode("shared/Editions.cs");
+  var editions = GetService<Editions>();
 
   // Create helper to integrate react best-practice
-  var ngHelpers = GetCode("shared/React.cs");
+  var ngHelpers = GetService<React>();
 
   // Show React either from dev (local) or from the compiled live/staging folders
   if (editions.CurrentEdition == "local")

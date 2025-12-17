@@ -1,9 +1,11 @@
 @inherits Custom.Hybrid.RazorTyped
+@using AppCode.Editions
+
 @{
   // -------------------------------- Show Edition Select -------------------------------
   //Show the toolbar to select an edition - usually only for the superuser / developer
 
-  var editionHelper = GetCode("shared/Editions.cs");
+  var editionHelper = GetService<Editions>();
   var currentEdition = editionHelper.CurrentEdition;
 
   var editions = MyModel.Code("Editions").Split(',');

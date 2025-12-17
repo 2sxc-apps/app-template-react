@@ -1,6 +1,8 @@
 @inherits Custom.Hybrid.RazorTyped
+@using AppCode.React
+
 @{
-  var reactHelper = GetCode("shared/React.cs");
+  var reactHelper = GetService<React>();
   var localDevServer = reactHelper.GetLocalDevServer();
 }
 
