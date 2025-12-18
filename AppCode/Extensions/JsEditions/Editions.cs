@@ -1,8 +1,5 @@
 using System.Linq;
 using System.Web;
-using AppCode.Data;
-using ToSic.Razor.Blade;
-using ToSic.Razor.Html5;
 
 namespace AppCode.Extensions.JsEditions
 {
@@ -14,7 +11,6 @@ namespace AppCode.Extensions.JsEditions
 
     // ----------------------------------  Private Constants ----------------------------------
     private const string DefaultEdition = "live";    // the default edition if nothing is set
-    private const string DefaultEditions = "live,staging,local";  // Default list of editions
     private const string CookieNameTemplate = "polymorph-app-#-edition"; // the cookie name to remember edition when developing / testing
 
     // -------------------------------- Current Edition Info -------------------------------

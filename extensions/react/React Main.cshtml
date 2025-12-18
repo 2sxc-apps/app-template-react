@@ -5,8 +5,10 @@
 @using ToSic.Razor.Blade;
 
 @{
-  var moduleId = MyModel.Int("ModuleId");
-  var editions = MyModel.String("Editions");
+  var editions = MyModel.String("Editions", fallback: "live,staging,local");
+  var appName = MyModel.String("AppName");
+  
+  var moduleId = MyContext.Module.Id;
 
   // Enable 2sic JS APIs (this will load the latest js-api to help with getting data from 2sxc data base)
   var page = GetService<IPageService>();
@@ -24,14 +26,11 @@
   // Show React either from dev (local) or from the compiled live/staging folders
   if (editionsHelper.CurrentEdition == "local")
   {
-    @Html.Partial("./React Loader.cshtml")
+    @Html.Partial("./React Loader.cshtml");
   }
   else
   {
     @Html.Raw(reactHelper.ImportReactHtml(editionsHelper.CurrentEdition));
-
-    // Add the root div with the moduleId to the page
-    <div id="root-@moduleId"></div>
   }
 
   // Show edition selector for host/super users only - you could also change this, to allow testers to see this
@@ -41,4 +40,5 @@
   }
 }
 
-@Kit.Page.TurnOn("window.reactApp.init()", data: new { moduleId = moduleId } )
+@Kit.Page.TurnOn($"window.reactAppRegistry.register()", data: new { appName = appName } )
+@Kit.Page.TurnOn($"window.{appName}.init()", data: new { moduleId = moduleId } )

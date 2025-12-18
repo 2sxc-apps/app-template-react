@@ -1,3 +1,5 @@
 @inherits Custom.Hybrid.RazorTyped
 
-@Html.Partial("./extensions/react/React Main.cshtml", new { ModuleId = MyContext.Module.Id, Editions = "live,staging,local" })
+@Html.Partial("./extensions/react/React Main.cshtml", new {
+  AppName = "demo-react" + MyContext.Module.Id,
+})
