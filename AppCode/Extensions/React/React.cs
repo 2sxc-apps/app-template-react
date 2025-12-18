@@ -13,7 +13,7 @@ namespace AppCode.Extensions.React
 
     // ----------------------------------  Private Constants ----------------------------------
     private const string DefaultAppName = "app"; // Vite app name if not set
-    private const string DefaultAppTag = "root-"; // React default root tag
+    private const string DefaultAppTag = "root"; // React default root tag
     private const string LocalDevServer = "//localhost:5173";
 
     // ------------------------------ Get from Generated HTML ------------------------------
@@ -48,7 +48,7 @@ namespace AppCode.Extensions.React
 
       // 5. Find the app-tag, and add the edition
       var moduleId = MyContext.Module.Id;
-      html = html.Replace("<div id=\"" + appTag + moduleId + "\"></div>", "<div id=\"" + appTag + moduleId + "\"" + AppAttributes(edition, resourcesPath + "/") + "></div>");
+      html = html.Replace("<div id=\"" + appTag + "\"></div>", "<div id=\"" + appTag + "-" + moduleId + "\"" + AppAttributes(edition, resourcesPath + "/") + "></div>");
 
       return html;
     }
@@ -60,7 +60,7 @@ namespace AppCode.Extensions.React
       // Pass edition/dist-path as data attributes if desired
       // Set the moduleId to scope the app to the current module
       var moduleId = MyContext.Module.Id;
-      return "<div id=\"" + appTag + moduleId + "\"" + AppAttributes(edition, localDevServer + "/") + "></div>";
+      return "<div id=\"" + appTag + "-" + moduleId + "\"" + AppAttributes(edition, localDevServer + "/") + "></div>";
     }
 
     public string GetLocalDevServer() {
