@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 using System.Web.Helpers;
 using ToSic.Razor.Blade;
 
-namespace AppCode.React
+namespace AppCode.Extensions.React
 {
   public class React: Custom.Hybrid.CodeTyped {
     // -------------------------------------------------------------------------------------

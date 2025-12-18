@@ -1,0 +1,44 @@
+@inherits Custom.Hybrid.RazorTyped
+@using AppCode.Extensions.JsEditions
+@using AppCode.Extensions.React
+@using ToSic.Sxc.Services;
+@using ToSic.Razor.Blade;
+
+@{
+  var moduleId = MyModel.Int("ModuleId");
+  var editions = MyModel.String("Editions");
+
+  // Enable 2sic JS APIs (this will load the latest js-api to help with getting data from 2sxc data base)
+  var page = GetService<IPageService>();
+  page.Activate("2sxc.JsCore");
+
+  // Add <base> tag using RazorBlade - TODO: Check if needed
+  page.SetBase((Link.Base()));
+
+  // Create helper to manage the editions (live, staging etc.)
+  var editionsHelper = GetService<Editions>();
+
+  // Create helper to integrate react best-practice
+  var reactHelper = GetService<React>();
+
+  // Show React either from dev (local) or from the compiled live/staging folders
+  if (editionsHelper.CurrentEdition == "local")
+  {
+    @Html.Partial("./React Loader.cshtml")
+  }
+  else
+  {
+    @Html.Raw(reactHelper.ImportReactHtml(editionsHelper.CurrentEdition));
+
+    // Add the root div with the moduleId to the page
+    <div id="root-@moduleId"></div>
+  }
+
+  // Show edition selector for host/super users only - you could also change this, to allow testers to see this
+  if (MyUser.IsContentAdmin)
+  {
+    @Html.Partial("../js-editions/Editions Bar.cshtml", new { Editions = editions })
+  }
+}
+
+@Kit.Page.TurnOn("window.reactApp.init()", data: new { moduleId = moduleId } )

@@ -4,7 +4,7 @@ using AppCode.Data;
 using ToSic.Razor.Blade;
 using ToSic.Razor.Html5;
 
-namespace AppCode.Editions
+namespace AppCode.Extensions.JsEditions
 {
   public class Editions: Custom.Hybrid.CodeTyped {
     // -------------------------------------------------------------------------------------
