@@ -12,13 +12,13 @@ const winAny = window as any;
 
 // Central registry for all instances
 winAny.reactAppRegistry = {
-  register({  appName }: { appName: string, }) {
+  register({ appName }: { appName: string, }) {
     console.log(`Registering app: ${appName}`);
 
     // Define the init method for the app
     winAny[appName] = {
       init: ({ moduleId }: { moduleId: number }) => {
-        console.log(`${appName} initialized with moduleId:  ${moduleId}`);
+        console.log(`${appName} initialized with moduleId: ${moduleId}`);
         const rootEl = document.getElementById(`root-${moduleId}`);
         
         if (!rootEl) {
