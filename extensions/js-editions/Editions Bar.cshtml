@@ -19,7 +19,7 @@
     {
       var selected = name == currentEdition ? "selected" : "not-selected";
       var style = name == currentEdition ? "font-weight: bold; text-decoration: underline;" : "";
-      <button type="button" onclick="sxcReactApp.setEdition('@name')" class='btn btn-default' style="@style">
+      <button type="button" onclick="sxcReactApp.setEdition('@name', '@editionHelper.EditionCookieName()')" class='btn btn-default' style="@style">
         @name
       </button>
     }
@@ -27,7 +27,7 @@
 </div>
 
 <script>
-  window.sxcReactApp = {
+  window.sxcReactApp = window.sxcReactApp || {
     // Source: https://stackoverflow.com/questions/14573223/set-cookie-and-get-cookie-with-javascript
     setCookie: function setCookie(name, value, days) {
       var expires = "";
@@ -41,8 +41,7 @@
     eraseCookie: function eraseCookie(name) {
       document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
     },
-    setEdition: function setEdition(edition) {
-      let cookieName = '@editionHelper.EditionCookieName()';
+    setEdition: function setEdition(edition, cookieName) {
       if (edition)
         this.setCookie(cookieName, edition);
       else
@@ -51,5 +50,5 @@
       // reload page, preserving hash & react route
       location.reload();
     }
-  }
+  };
 </script>
